@@ -1,9 +1,5 @@
 import jwt from "jsonwebtoken";
 
-if (!process.env.JWT_SECRET) {
-  throw new Error("JWT_SECRET no está definido en las variables de entorno");
-}
-
 const default_user = {
   id: 1,
   email: "user@email.com",
@@ -11,9 +7,12 @@ const default_user = {
 };
 
 export const login = async (req, res) => {
-  const { email, password } = req.body;
-
   try {
+    if (!process.env.JWT_SECRET) {
+      throw new Error("JWT_SECRET no está definido en las variables de entorno");
+    }
+
+    const { email, password } = req.body;
     const isValidUser = email === default_user.email && password === default_user.password;
 
     if (isValidUser) {
