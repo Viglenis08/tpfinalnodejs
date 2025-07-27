@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (req, res) => {
-    res.json({ message: "Bienvenido a la API REST" });
+    res.status(200).json({ message: "Bienvenido a la API REST" });
 });
 
 import productsRouter from './src/routes/products.router.js';
