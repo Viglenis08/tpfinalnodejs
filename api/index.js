@@ -3,6 +3,7 @@ dotenv.config();
 
 import express from "express";
 import serverless from "serverless-http";
+import app from "../index.js";
 
 import productsRouter from "../src/routes/products.router.js";
 import authRouter from "../src/routes/auth.router.js";
