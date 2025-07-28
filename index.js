@@ -18,19 +18,15 @@ app.get('/', (req, res) => {
   res.status(200).json({ message: "Bienvenido a la API REST" });
 });
 
-app.use("/api/auth", authRouter);
+app.use("/auth  ", authRouter);
 app.use("/api/products", authentication, productsRouter);
 
-app.use((req, res) => {
+app.use((req, res,next) => {
   res.status(404).send('Recurso no encontrado');
 });
 
-// 🚫 No escuches el puerto en producción
-if (process.env.NODE_ENV !== "production") {
-  const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
-  });
-}
+app.listen(app.get("PORT"),()=>{
+     console.log(`Servidor corriendo en el puerto http://localhost:${app.get("PORT")}`);
+});
 
 export default app;
