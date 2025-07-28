@@ -29,5 +29,5 @@ app.use((req, res) => {
   res.status(404).send('Recurso no encontrado');
 });
 
-// Exporta como función serverless (no app.listen)
+// Exportar como serverless function
 export default serverless(app);
