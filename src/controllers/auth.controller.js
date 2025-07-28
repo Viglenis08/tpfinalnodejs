@@ -1,4 +1,4 @@
-import { generateToken } from "../services/token-generator.js";
+import { generateToken } from "../utils/token-generators.js";
 
 const default_user = {
   id: 1,
