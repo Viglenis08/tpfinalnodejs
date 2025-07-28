@@ -29,7 +29,12 @@ app.use((req, res) => {
   res.status(404).send('Recurso no encontrado');
 });
 
-// Iniciar servidor
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+// 🔑 Solo iniciar el servidor cuando NO esté en Vercel
+if (process.env.NODE_ENV !== "production") {
+  app.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  });
+}
+
+// Exportar para Vercel (serverless)
+export default app;
