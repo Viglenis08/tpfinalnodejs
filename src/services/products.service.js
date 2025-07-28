@@ -1,4 +1,4 @@
-import { getAllProducts,findById,findByText, saveProduct,deleteProduct,updateProduct } from "../models/product.model.js";
+import { getAllProducts,findById,findByText, saveProduct,deleteProduct,updateProduct } from "../models/products.models.js";
 
 const getAll = async ()=>{
     return await getAllProducts();
