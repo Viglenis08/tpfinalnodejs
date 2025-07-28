@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import serverless from 'serverless-http';
-
+import app from '../index.js';
 import productsRouter from '../src/routes/products.router.js';
 import authRouter from '../src/routes/auth.router.js';
 import { authentication } from '../src/middlewares/auth.middleware.js';
