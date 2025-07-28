@@ -1,27 +1,33 @@
-import dotenv from "dotenv";
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import serverless from 'serverless-http';
+
+import productsRouter from '../src/routes/products.router.js';
+import authRouter from '../src/routes/auth.router.js';
+import { authentication } from '../src/middlewares/auth.middleware.js';
+
 dotenv.config();
-
-import express from "express";
-import serverless from "serverless-http";
-import app from "../index.js";
-
-import productsRouter from "../src/routes/products.router.js";
-import authRouter from "../src/routes/auth.router.js";
 
 const app = express();
 
+// Middlewares
+app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
+// Rutas principales
+app.get('/', (req, res) => {
   res.status(200).json({ message: "Bienvenido a la API REST" });
 });
 
-app.use("/api", productsRouter);
+// Rutas API
 app.use("/api/auth", authRouter);
+app.use("/api/products", authentication, productsRouter);
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ message: "Ocurrió un error en el servidor" });
+// Manejo de rutas inexistentes
+app.use((req, res) => {
+  res.status(404).send('Recurso no encontrado');
 });
 
+// Exporta como función serverless (no app.listen)
 export default serverless(app);
