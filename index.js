@@ -1,4 +1,3 @@
-// index.js
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -18,15 +17,19 @@ app.get('/', (req, res) => {
   res.status(200).json({ message: "Bienvenido a la API REST" });
 });
 
-app.use("/auth  ", authRouter);
+app.use("/auth", authRouter);
 app.use("/api/products", authentication, productsRouter);
 
-app.use((req, res,next) => {
+app.use((req, res) => {
   res.status(404).send('Recurso no encontrado');
 });
 
-app.listen(app.get("PORT"),()=>{
-     console.log(`Servidor corriendo en el puerto http://localhost:${app.get("PORT")}`);
-});
+// Solo para desarrollo local
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  });
+}
 
 export default app;
