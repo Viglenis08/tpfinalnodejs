@@ -8,6 +8,7 @@ import authRouter from './src/routes/auth.router.js';
 import { authentication } from './src/middlewares/auth.middleware.js';
 
 dotenv.config();
+
 const app = express();
 
 app.use(cors());
@@ -24,7 +25,7 @@ app.use((req, res) => {
   res.status(404).send('Recurso no encontrado');
 });
 
-// 👇 Solo en local
+// 🚫 No escuches el puerto en producción
 if (process.env.NODE_ENV !== "production") {
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
