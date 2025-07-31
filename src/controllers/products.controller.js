@@ -69,7 +69,7 @@ const addProduct = async (req, res) => {
     };
 
     await productService.createNewProduct(newProduct);
-    res.status(201).json({ mensaje: 'Se creo un nuevo articulo', payload: newProduct });
+    res.status(201).json({ mensaje: 'Producto creado correctamente', payload: newProduct });
 
   } catch (error) {
     res.status(500).json({ mensaje: "Error interno del servidor", error: error.message });
@@ -95,7 +95,7 @@ const updateProduct = async (req, res) => {
     await productService.updatePrd(id, updatedData);
 
     res.status(200).json({
-      mensaje: `Producto con ID ${id} actualizado correctamente.`,
+      mensaje: `Producto con ID ${id} se actualizo correctamente.`,
     });
   } catch (error) {
     res.status(500).json({
@@ -104,6 +104,8 @@ const updateProduct = async (req, res) => {
     });
   }
 };
+
+
 
 export default {
   getProducts,
