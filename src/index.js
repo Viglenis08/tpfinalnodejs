@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
-import router from '../src/routes/products.router.js';
-import authRouter from '../src/routes/auth.router.js';
-import { authentication } from '../src/middlewares/auth.middleware.js';
+import productsRouter from './routes/products.router.js';
+import authRouter from './routes/auth.router.js';
+import { authentication } from './middlewares/auth.middleware.js';
 
 const app = express();
 app.set("PORT",3000);
@@ -11,12 +11,11 @@ app.use(cors());
 app.use(express.json())
 
 app.get ('/',(req,res) =>{
-    res.json({Mensaje: "Raiz de la api, elija un endpoint"})
+    res.json({Mensaje: "Bienvenido a la API STORE"})
 });
 
-
-app.use("/auth",authRouter)
-app.use("/api/products",authentication,router)
+app.use("/auth", authRouter);  
+app.use("/api/products", authentication, productsRouter); 
 
 
 app.use((req,res,next) =>{
